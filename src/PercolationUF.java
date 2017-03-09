@@ -31,6 +31,7 @@ public class PercolationUF implements IPercolate {
 	 * a IUnionFind object to determine whether cells are full
 	 */
 	public PercolationUF(int n) {
+		if (n <= 0) throw new IllegalArgumentException();
 		myOpenSites = 0;
 		myGrid = new int[n][n];
 		bottom = n * n + 1;
@@ -72,7 +73,7 @@ public class PercolationUF implements IPercolate {
 			throw new IndexOutOfBoundsException("Index " + i + "," + j + " is bad!");
 		
 		// check if the cell (row, column) of myGrid is open
-		return myGrid[i][j] == OPEN; //|| myGrid[i][j] == FULL;
+		return myGrid[i][j] == OPEN;
 	}
 
 	public boolean isFull(int i, int j) {
@@ -81,7 +82,7 @@ public class PercolationUF implements IPercolate {
 			throw new IndexOutOfBoundsException("Index " + i + "," + j + " is bad!");
 		
 		// check if the cell (row, column) of myGrid is full
-		return myGrid[i][j] != BLOCKED; //|| myGrid[i][j] == OPEN;
+		return myUnion.connected(top, getIndex(i, j));
 	}
 
 	public int numberOfOpenSites() {
