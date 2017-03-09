@@ -44,7 +44,7 @@ public class PercolationStats {
 		
 		// perform T experiments for an N-by-N grid
 		for (int i = 0; i < T; i++) {
-			PercolationDFS perc = new PercolationDFS(N); // initialize new Percolation object
+			PercolationUF perc = new PercolationUF(N); // initialize new Percolation object
 			int myOpenedSites = 0; // initialize a variable to keep track of opened sites
 			
 			start = System.currentTimeMillis()/1000;	// start time for percolation trial
