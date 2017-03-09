@@ -1,21 +1,50 @@
 Name: Katherine Li
 NetID: kl261
 Hours Spent: 8.0
-Consulted With: Peyton Schafer, TA Cathy Chi
+Consulted With: Peyton Schafer, TA Cathy Chi, Dr. Forbes
 Resources Used: None
 Impressions: The actual coding portion of the assignment wasn't too hard; it was mainly really difficult because the instructions
 were vague and unclear and the concept of union find structures was hard to grasp.
 ----------------------------------------------------------------------
 Problem 1: How does doubling N affect the running time?
+PercolationDFS:
+T = 10, N = 20 --> runtime = 43 ms
+		N = 40 --> runtime = 95 ms
+		N = 80 --> runtime = 304 ms
+
+PercolationUF w/ QuickFind:
+T = 10, N = 20 --> runtime = 14 ms
+		N = 40 --> runtime = 27 ms
+		N = 80 --> runtime = 196 ms
+
+PercolationUF w/ QuickUWPC:
+T = 10, N = 20 --> runtime = 8 ms
+		N = 40 --> runtime = 14 ms
+		N = 80 --> runtime = 31 ms
 
 Problem 2: How does doubling T affect the running time?
+PercolationDFS:
+N = 20, T = 10 --> runtime = 41 ms
+		T = 20 --> runtime = 64 ms
+		T = 40 --> runtime = 70 ms
+
+PercolationUF w/ QuickFind:
+N = 20, T = 10 --> runtime = 12 ms
+		T = 20 --> runtime = 18 ms
+		T = 40 --> runtime = 22 ms
+
+PercolationUF w/ QuickUWPC:
+N = 20, T = 10 --> runtime = 8 ms
+		T = 20 --> runtime = 10 ms
+		T = 40 --> runtime = 13 ms
 
 Problem 3: Measure running time (using calls to System.currentTimeMillis)
 of the three versions of your program (DFS, Quick Find, and weighted quick
 union with path compression).
-3A DFS: 
-3B Quick Find:
-3C Weighted quick union with path compression:
+When N = 20 and T = 10:
+3A DFS: 37 ms
+3B Quick Find: 13 ms
+3C Weighted quick union with path compression: 8 ms
 
 Problem 4: Give a formula (using Big-Oh notation) of the running time on your computer (in seconds) as a function of both N and T.
 

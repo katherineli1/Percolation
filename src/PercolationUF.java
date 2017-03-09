@@ -38,6 +38,19 @@ public class PercolationUF implements IPercolate {
 		bottom = n * n + 1;
 		myUnion = new QuickUWPC(n * n + 2);
 	}
+	
+	/** 
+	 * Alternative constructor for PercolationUF that also takes different
+	 * types of IUnionFind objects
+	 */
+	public PercolationUF(int n, IUnionFind unionObj) {
+		if (n <= 0) throw new IllegalArgumentException();
+		myOpenSites = 0;
+		myGrid = new int[n][n];
+		top = n * n;
+		bottom = n * n + 1;
+		myUnion = unionObj;
+	}
 
 	/**
 	 * Return an index that uniquely identifies (row,col), typically an index
