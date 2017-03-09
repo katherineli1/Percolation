@@ -1,3 +1,4 @@
+
 /**
  * Simulate a system to see its Percolation Threshold, but use a UnionFind
  * implementation to determine whether simulation occurs. The main idea is that
@@ -51,21 +52,18 @@ public class PercolationUF implements IPercolate {
 		return row * myGrid[row].length + col;
 	}
 
-	public void open(int i, int j) {
-		// TODO complete open
-		
+	public void open(int i, int j) {		
 		if (i < 0 || i >= myGrid.length || j < 0 || j >= myGrid[0].length)
 			// out of bounds
 			throw new IndexOutOfBoundsException("Index " + i + "," + j + " is bad!");
 		
-//		if (myGrid[i][j] != BLOCKED)
-//			return;
+		if (myGrid[i][j] != BLOCKED)
+			return;
 		
 		myOpenSites++;
 		myGrid[i][j] = OPEN;
 		
 		connect(i, j);
-			
 	}
 
 	public boolean isOpen(int i, int j) {
@@ -83,7 +81,7 @@ public class PercolationUF implements IPercolate {
 			throw new IndexOutOfBoundsException("Index " + i + "," + j + " is bad!");
 		
 		// check if the cell (row, column) of myGrid is full
-		return myGrid[i][j] == FULL || myGrid[i][j] == OPEN;
+		return myGrid[i][j] != BLOCKED; //|| myGrid[i][j] == OPEN;
 	}
 
 	public int numberOfOpenSites() {
@@ -112,3 +110,14 @@ public class PercolationUF implements IPercolate {
 	}
 
 }
+
+//private List<Point> fileInput(String filename) {
+//	Scanner scan = new Scanner(filename);
+//	int n = Integer.parseInt(scan.nextLine());
+//	ArrayList<Point> list = new ArrayList<Point>();
+//	while (scan.hasNext()) {
+//		list.add(new Point(Integer.parseInt(scan.next()), Integer.parseInt(scan.next())));
+//	}
+//	scan.close();
+//	return list;
+//}

@@ -37,10 +37,12 @@ public class PercolationStats {
 	 * @param fractions
 	 * 				double array of percolation thresholds
 	 */
-	public PercolationStats(int N, int T) {
+	public PercolationStats(int N_loc, int T_loc) {
 		if (N <= 0 || T <= 0)
 			throw new IllegalArgumentException();
 		
+		N = N_loc;
+		T = T_loc;
 		long start;
 		long end;
 		times = new long[T];
@@ -104,17 +106,18 @@ public class PercolationStats {
 	}
 	
 	// print out statistics values for testing and analysis
-	public void main(String[] args) {
+	public static void main(String[] args) {
+		int N_loc, T_loc;
 		if (args.length == 2) {
-			N = Integer.parseInt(args[0]);
-			T = Integer.parseInt(args[1]);
+			N_loc = Integer.parseInt(args[0]);
+			T_loc = Integer.parseInt(args[1]);
 		} else {
 			String input = JOptionPane.showInputDialog("Enter N and T", "20, 100");
-			N = Integer.parseInt(input.split(", ")[0]);
-			T = Integer.parseInt(input.split(", ")[1]);
+			N_loc = Integer.parseInt(input.split(", ")[0]);
+			T_loc = Integer.parseInt(input.split(", ")[1]);
 		}
 		
-		PercolationStats test = new PercolationStats(N, T);
+		PercolationStats test = new PercolationStats(N_loc, T_loc);
 		System.out.println(test.mean());
 		System.out.println(test.stddev());
 		System.out.println(test.confidenceLow());
