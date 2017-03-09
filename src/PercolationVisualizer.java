@@ -56,6 +56,7 @@ public class PercolationVisualizer {
 			}
 	}
 	
+	// generate a random list of shuffled cell positions within the grid
 	public List<Point> getShuffledCells() {
 		ArrayList<Point> list = new ArrayList<Point>();
 		for (int i = 0; i < mySize; i++)

@@ -28,6 +28,7 @@ public class PercolationDFS implements IPercolate {
 	 * 				is the size of the simulated (square) grid
 	 */
 	public PercolationDFS(int n) {
+		if (n <= 0) throw new IllegalArgumentException();
 		myOpenSites = 0;
 		myGrid = new int[n][n];
 		for (int[] row : myGrid)

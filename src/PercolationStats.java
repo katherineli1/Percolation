@@ -1,3 +1,7 @@
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
@@ -47,16 +51,30 @@ public class PercolationStats {
 			PercolationUF perc = new PercolationUF(N); // initialize new Percolation object
 			int myOpenedSites = 0; // initialize a variable to keep track of opened sites
 			
-			start = System.currentTimeMillis()/1000;	// start time for percolation trial
-			while (!perc.percolates()) {
-				perc.open(ourRandom.nextInt(N), ourRandom.nextInt(N));
+			start = System.currentTimeMillis()/1000; // start time for percolation trial
+			List<Point> sites = getShuffledCells();	// get random list of sites
+			for (Point cell: sites) {
+				// repeatedly declare sites open until the system percolates
+				perc.open(cell.x, cell.y);
 				myOpenedSites++;
+				if (perc.percolates())
+					break;
 			}
 			end = System.currentTimeMillis()/1000; // end time for percolation trial (after percolating)
 			times[i] = end - start; // store run time for percolation in 'times' long array
 			
 			fractions[i] = (double) myOpenedSites/(N*N); // store percolation threshold in 'fractions' double array
 		}
+	}
+	
+	// generate a random list of shuffled cell positions within the grid
+	public List<Point> getShuffledCells() {
+		ArrayList<Point> list = new ArrayList<Point>();
+		for (int i = 0; i < N; i++)
+			for (int j = 0; j < N; j++)
+				list.add(new Point(i, j));
+		Collections.shuffle(list, ourRandom);
+		return list;
 	}
 	
 	// calculate sample mean for generated percolation thresholds

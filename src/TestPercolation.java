@@ -115,19 +115,21 @@ public class TestPercolation {
 		assertTrue("This test checks if Exception thrown for isFull() for " + perc.getClass().getName(), passed3);
 	}
 
+	private void testBounds(IPercolate perc) {
+        bounds(perc, 10, -1,  5);
+        bounds(perc, 10, 11,  5);
+        bounds(perc, 10, 10,  5);
+        bounds(perc, 10,  5, -1);
+        bounds(perc, 10,  5, 11);
+        bounds(perc, 10,  5, 10);
+	}
 	/**
 	 * Check if Exception is thrown when (i, j) are out of bounds
 	 */
 	@Test(timeout = 2000)
 	public void testBounds() {
-		IPercolate perc1 = new PercolationDFS(10);
-		bounds(perc1, 10, -1, 5);
-		bounds(perc1, 10, 0, 5);
-		bounds(perc1, 10, 11, 5);
-		IPercolate perc2 = new PercolationUF(10);
-		bounds(perc2, 10, 5, -1);
-		bounds(perc2, 10, 5, 0);
-		bounds(perc2, 10, 5, 11);
+		testBounds(new PercolationDFS(10));
+		testBounds(new PercolationUF(10));
 	}
 
 }
