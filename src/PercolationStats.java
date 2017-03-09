@@ -20,7 +20,7 @@ public class PercolationStats {
 	public static int RANDOM_SEED = 1234;
 	public static Random ourRandom = new Random(RANDOM_SEED);
 	
-	private int N, T;
+	private static int N, T;
 	private long[] times;
 	private double[] fractions;
 	
@@ -40,9 +40,7 @@ public class PercolationStats {
 	public PercolationStats(int N_loc, int T_loc) {
 		if (N <= 0 || T <= 0)
 			throw new IllegalArgumentException();
-		
-		N = N_loc;
-		T = T_loc;
+
 		long start;
 		long end;
 		times = new long[T];
@@ -90,6 +88,7 @@ public class PercolationStats {
 	// calculate sample standard deviation for generated percolation thresholds
 	public double stddev() {
 		double sum = 0;
+		if (T == 1) return Double.NaN;
 		for (int i = 0; i < T; i++)
 			sum += Math.pow(fractions[i] - mean(), 2);
 		return sum/(T-1);
@@ -107,17 +106,16 @@ public class PercolationStats {
 	
 	// print out statistics values for testing and analysis
 	public static void main(String[] args) {
-		int N_loc, T_loc;
 		if (args.length == 2) {
-			N_loc = Integer.parseInt(args[0]);
-			T_loc = Integer.parseInt(args[1]);
+			N = Integer.parseInt(args[0]);
+			T = Integer.parseInt(args[1]);
 		} else {
 			String input = JOptionPane.showInputDialog("Enter N and T", "20, 100");
-			N_loc = Integer.parseInt(input.split(", ")[0]);
-			T_loc = Integer.parseInt(input.split(", ")[1]);
+			N = Integer.parseInt(input.split(", ")[0]);
+			T = Integer.parseInt(input.split(", ")[1]);
 		}
 		
-		PercolationStats test = new PercolationStats(N_loc, T_loc);
+		PercolationStats test = new PercolationStats(N, T);
 		System.out.println(test.mean());
 		System.out.println(test.stddev());
 		System.out.println(test.confidenceLow());

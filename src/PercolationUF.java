@@ -72,7 +72,7 @@ public class PercolationUF implements IPercolate {
 			throw new IndexOutOfBoundsException("Index " + i + "," + j + " is bad!");
 		
 		// check if the cell (row, column) of myGrid is open
-		return myGrid[i][j] == OPEN || myGrid[i][j] == FULL;
+		return myGrid[i][j] == OPEN; //|| myGrid[i][j] == FULL;
 	}
 
 	public boolean isFull(int i, int j) {
