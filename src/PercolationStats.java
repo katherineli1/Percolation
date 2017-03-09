@@ -20,7 +20,7 @@ public class PercolationStats {
 	public static int RANDOM_SEED = 1234;
 	public static Random ourRandom = new Random(RANDOM_SEED);
 	
-	private static int N, T;
+	private int N, T;
 	private long[] times;
 	private double[] fractions;
 	
@@ -68,7 +68,7 @@ public class PercolationStats {
 	}
 	
 	// generate a random list of shuffled cell positions within the grid
-	public List<Point> getShuffledCells() {
+	private List<Point> getShuffledCells() {
 		ArrayList<Point> list = new ArrayList<Point>();
 		for (int i = 0; i < N; i++)
 			for (int j = 0; j < N; j++)
@@ -104,7 +104,7 @@ public class PercolationStats {
 	}
 	
 	// print out statistics values for testing and analysis
-	public static void main(String[] args) {
+	public void main(String[] args) {
 		if (args.length == 2) {
 			N = Integer.parseInt(args[0]);
 			T = Integer.parseInt(args[1]);

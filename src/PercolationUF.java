@@ -58,8 +58,8 @@ public class PercolationUF implements IPercolate {
 			// out of bounds
 			throw new IndexOutOfBoundsException("Index " + i + "," + j + " is bad!");
 		
-		if (myGrid[i][j] != BLOCKED)
-			return;
+//		if (myGrid[i][j] != BLOCKED)
+//			return;
 		
 		myOpenSites++;
 		myGrid[i][j] = OPEN;
