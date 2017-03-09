@@ -20,7 +20,7 @@ public class PercolationStats {
 	public static int RANDOM_SEED = 1234;
 	public static Random ourRandom = new Random(RANDOM_SEED);
 	
-	private static int N, T;
+	private int N, T;
 	private long[] times;
 	private double[] fractions;
 	
@@ -77,6 +77,11 @@ public class PercolationStats {
 			
 			fractions[i] = (double) myOpenedSites/(N*N); // store percolation threshold in 'fractions' double array
 		}
+		
+		mean();
+		stddev();
+		confidenceLow();
+		confidenceHigh();
 	}
 	
 //	// generate a random list of shuffled cell positions within the grid
@@ -94,7 +99,7 @@ public class PercolationStats {
 		double sum = 0;
 		for (int i = 0; i < T; i++)
 			sum += fractions[i];
-		return sum/T;
+		return sum/ (double) T;
 	}
 	
 	// calculate sample standard deviation for generated percolation thresholds
@@ -103,7 +108,7 @@ public class PercolationStats {
 		if (T == 1) return Double.NaN;
 		for (int i = 0; i < T; i++)
 			sum += Math.pow(fractions[i] - mean(), 2);
-		return Math.sqrt(sum/(T-1));
+		return Math.sqrt(sum/((double) T - 1));
 	}
 	
 	// calculate low endpoint of 95% confidence interval for generated percolation thresholds
@@ -118,20 +123,20 @@ public class PercolationStats {
 	
 	// print out statistics values for testing and analysis
 	public static void main(String[] args) {
-		if (args.length == 2) {
-			N = Integer.parseInt(args[0]);
-			T = Integer.parseInt(args[1]);
-		} else {
-			String input = JOptionPane.showInputDialog("Enter N and T", "20, 100");
-			N = Integer.parseInt(input.split(", ")[0]);
-			T = Integer.parseInt(input.split(", ")[1]);
-		}
+//		if (args.length == 2) {
+//			N = Integer.parseInt(args[0]);
+//			T = Integer.parseInt(args[1]);
+//		} else {
+//			String input = JOptionPane.showInputDialog("Enter N and T", "20, 100");
+//			N = Integer.parseInt(input.split(", ")[0]);
+//			T = Integer.parseInt(input.split(", ")[1]);
+//		}
 		
-		PercolationStats test = new PercolationStats(N, T);
-		System.out.println(test.mean());
-		System.out.println(test.stddev());
-		System.out.println(test.confidenceLow());
-		System.out.println(test.confidenceHigh());
+		PercolationStats test = new PercolationStats(20, 10);
+//		System.out.println(mean());
+//		System.out.println(stddev());
+//		System.out.println(confidenceLow());
+//		System.out.println(confidenceHigh());
 	}
 	
 }

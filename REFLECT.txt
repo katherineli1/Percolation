@@ -1,9 +1,10 @@
-Name: firstname lastname
-NetID: abc123
-Hours Spent: Give an exact (decimal) number here
-Consulted With: provide names or NetIDs of any students, TAs, or professors you consulted with on the assignment. If you did not consult with anyone, you must explicitly write NONE.
-Resources Used: Any books, papers, or online resources. If you did not use any outside resources, you must explicitly write NONE 
-Impressions: Your answer here
+Name: Katherine Li
+NetID: kl261
+Hours Spent: 8.0
+Consulted With: Peyton Schafer, TA Cathy Chi
+Resources Used: None
+Impressions: The actual coding portion of the assignment wasn't too hard; it was mainly really difficult because the instructions
+were vague and unclear and the concept of union find structures was hard to grasp.
 ----------------------------------------------------------------------
 Problem 1: How does doubling N affect the running time?
 
