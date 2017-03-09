@@ -1,5 +1,6 @@
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -37,10 +38,13 @@ public class PercolationStats {
 	 * @param fractions
 	 * 				double array of percolation thresholds
 	 */
-	public PercolationStats(int N, int T) {
+	public PercolationStats(int N_loc, int T_loc) {
+		N = N_loc;
+		T = T_loc;
+		
 		if (N <= 0 || T <= 0)
 			throw new IllegalArgumentException();
-
+		
 		long start;
 		long end;
 		times = new long[T];
@@ -97,18 +101,18 @@ public class PercolationStats {
 	// calculate sample mean for generated percolation thresholds
 	public double mean() {
 		double sum = 0;
-		for (int i = 0; i < T; i++)
-			sum += fractions[i];
-		return sum/ (double) T;
+		for (double n : fractions)
+			sum += n;
+		return sum/ T;
 	}
 	
 	// calculate sample standard deviation for generated percolation thresholds
 	public double stddev() {
 		double sum = 0;
 		if (T == 1) return Double.NaN;
-		for (int i = 0; i < T; i++)
-			sum += Math.pow(fractions[i] - mean(), 2);
-		return Math.sqrt(sum/((double) T - 1));
+		for (double n : fractions)
+			sum += Math.pow(n - mean(), 2);
+		return Math.sqrt(sum/(T - 1));
 	}
 	
 	// calculate low endpoint of 95% confidence interval for generated percolation thresholds
@@ -133,10 +137,10 @@ public class PercolationStats {
 //		}
 		
 		PercolationStats test = new PercolationStats(20, 10);
-//		System.out.println(mean());
-//		System.out.println(stddev());
-//		System.out.println(confidenceLow());
-//		System.out.println(confidenceHigh());
+		System.out.println(test.mean());
+		System.out.println(test.stddev());
+		System.out.println(test.confidenceLow());
+		System.out.println(test.confidenceHigh());
 	}
 	
 }
