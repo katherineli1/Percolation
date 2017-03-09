@@ -55,10 +55,11 @@ public class PercolationStats {
 			List<Point> sites = getShuffledCells();	// get random list of sites
 			for (Point cell: sites) {
 				// repeatedly declare sites open until the system percolates
-				perc.open(cell.x, cell.y);
-				myOpenedSites++;
-				if (perc.percolates())
-					break;
+				if (!perc.isOpen(cell.x, cell.y))
+					perc.open(cell.x, cell.y);
+					myOpenedSites++;
+					if (perc.percolates())
+						break;
 			}
 			end = System.currentTimeMillis()/1000; // end time for percolation trial (after percolating)
 			times[i] = end - start; // store run time for percolation in 'times' long array
@@ -91,7 +92,7 @@ public class PercolationStats {
 		if (T == 1) return Double.NaN;
 		for (int i = 0; i < T; i++)
 			sum += Math.pow(fractions[i] - mean(), 2);
-		return sum/(T-1);
+		return Math.sqrt(sum/(T-1));
 	}
 	
 	// calculate low endpoint of 95% confidence interval for generated percolation thresholds
