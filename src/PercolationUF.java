@@ -105,15 +105,15 @@ public class PercolationUF implements IPercolate {
 		if (row == myGrid.length - 1) myUnion.union(getIndex(row, col), bottom);
 		
 		// union cell with four adjacent cells if cells are open and not out of bounds
-//		if ((row - 1 >= 0 && row - 1 < myGrid.length) && isOpen(row - 1, col)) myUnion.union(getIndex(row, col), getIndex(row - 1, col));
-//		if ((row + 1 >= 0 && row + 1 < myGrid.length) && isOpen(row + 1, col)) myUnion.union(getIndex(row, col), getIndex(row + 1, col));
-//		if ((col - 1 >= 0 && col - 1 < myGrid.length) && isOpen(row, col - 1)) myUnion.union(getIndex(row, col), getIndex(row, col - 1));
-//		if ((col + 1 >= 0 && col + 1 < myGrid.length) && isOpen(row, col + 1)) myUnion.union(getIndex(row, col), getIndex(row, col + 1));
+		if ((row - 1 >= 0 && row - 1 < myGrid.length) && isOpen(row - 1, col)) myUnion.union(getIndex(row, col), getIndex(row - 1, col));
+		if ((row + 1 >= 0 && row + 1 < myGrid.length) && isOpen(row + 1, col)) myUnion.union(getIndex(row, col), getIndex(row + 1, col));
+		if ((col - 1 >= 0 && col - 1 < myGrid.length) && isOpen(row, col - 1)) myUnion.union(getIndex(row, col), getIndex(row, col - 1));
+		if ((col + 1 >= 0 && col + 1 < myGrid.length) && isOpen(row, col + 1)) myUnion.union(getIndex(row, col), getIndex(row, col + 1));
 		
-		if (getIndex(row - 1, col) != OUT_BOUNDS && isOpen(row - 1, col)) myUnion.union(getIndex(row, col), getIndex(row - 1, col));
-		if (getIndex(row + 1, col) != OUT_BOUNDS && isOpen(row + 1, col)) myUnion.union(getIndex(row, col), getIndex(row + 1, col));
-		if (getIndex(row, col - 1) != OUT_BOUNDS && isOpen(row, col - 1)) myUnion.union(getIndex(row, col), getIndex(row, col - 1));
-		if (getIndex(row, col + 1) != OUT_BOUNDS && isOpen(row, col + 1)) myUnion.union(getIndex(row, col), getIndex(row, col + 1));
+//		if (getIndex(row - 1, col) != OUT_BOUNDS && isOpen(row - 1, col)) myUnion.union(getIndex(row, col), getIndex(row - 1, col));
+//		if (getIndex(row + 1, col) != OUT_BOUNDS && isOpen(row + 1, col)) myUnion.union(getIndex(row, col), getIndex(row + 1, col));
+//		if (getIndex(row, col - 1) != OUT_BOUNDS && isOpen(row, col - 1)) myUnion.union(getIndex(row, col), getIndex(row, col - 1));
+//		if (getIndex(row, col + 1) != OUT_BOUNDS && isOpen(row, col + 1)) myUnion.union(getIndex(row, col), getIndex(row, col + 1));
 	}
 
 }
