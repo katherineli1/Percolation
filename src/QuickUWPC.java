@@ -41,8 +41,7 @@ public class QuickUWPC implements IUnionFind {
 		return myComponents;
 	}
 	
-	// returns id of component corresponding to element x
-	// once the root of x is found
+	// returns id of component corresponding to element x once the root of x is found
 	// implements path compression
 	public int find(int x) {
 		validate(x);

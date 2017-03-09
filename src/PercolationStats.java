@@ -38,11 +38,12 @@ public class PercolationStats {
 	 * 				double array of percolation thresholds
 	 */
 	public PercolationStats(int N_loc, int T_loc) {
+		if (N_loc <= 0 || T_loc <= 0)
+			throw new IllegalArgumentException();
+		
 		N = N_loc;
 		T = T_loc;
 		fractions = new double[T];
-		if (N <= 0 || T <= 0)
-			throw new IllegalArgumentException();
 		
 		long start = System.currentTimeMillis(); // start time for percolation trial
 		
@@ -75,11 +76,6 @@ public class PercolationStats {
 		}
 		long end = System.currentTimeMillis(); // end time for percolation trial (after percolating);
 		System.out.println("Run Time: " + (end - start));
-		
-		mean();
-		stddev();
-		confidenceLow();
-		confidenceHigh();
 	}
 	
 //	// generate a random list of shuffled cell positions within the grid
