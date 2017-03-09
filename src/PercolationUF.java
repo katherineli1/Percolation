@@ -16,6 +16,8 @@
 
 public class PercolationUF implements IPercolate {
 	private final int OUT_BOUNDS = -1;
+	
+	public int[][] myGrid;
 
 	/**
 	 * Constructs a Percolation object for a nxn grid that that creates
@@ -23,6 +25,8 @@ public class PercolationUF implements IPercolate {
 	 */
 	public PercolationUF(int n) {
 		// TODO complete PercolationUF constructor
+		myGrid = new int[n][n];
+		
 	}
 
 	/**
