@@ -52,15 +52,26 @@ public class PercolationStats {
 			int myOpenedSites = 0; // initialize a variable to keep track of opened sites
 			
 			start = System.currentTimeMillis()/1000; // start time for percolation trial
-			List<Point> sites = getShuffledCells();	// get random list of sites
-			for (Point cell: sites) {
-				// repeatedly declare sites open until the system percolates
-				if (!perc.isOpen(cell.x, cell.y))
-					perc.open(cell.x, cell.y);
+			
+			while (!perc.percolates()) {
+				int x = ourRandom.nextInt(N);
+				int y = ourRandom.nextInt(N);
+				if (!perc.isOpen(x, y)) {
+					perc.open(x, y);
 					myOpenedSites++;
-					if (perc.percolates())
-						break;
+				}
 			}
+			
+//			List<Point> sites = getShuffledCells();	// get random list of sites
+//			for (Point cell: sites) {
+//				// repeatedly declare sites open until the system percolates
+//				if (!perc.isOpen(cell.x, cell.y))
+//					perc.open(cell.x, cell.y);
+//					myOpenedSites++;
+//					if (perc.percolates())
+//						break;
+//			}
+			
 			end = System.currentTimeMillis()/1000; // end time for percolation trial (after percolating)
 			times[i] = end - start; // store run time for percolation in 'times' long array
 			
@@ -68,15 +79,15 @@ public class PercolationStats {
 		}
 	}
 	
-	// generate a random list of shuffled cell positions within the grid
-	private List<Point> getShuffledCells() {
-		ArrayList<Point> list = new ArrayList<Point>();
-		for (int i = 0; i < N; i++)
-			for (int j = 0; j < N; j++)
-				list.add(new Point(i, j));
-		Collections.shuffle(list, ourRandom);
-		return list;
-	}
+//	// generate a random list of shuffled cell positions within the grid
+//	private List<Point> getShuffledCells() {
+//		ArrayList<Point> list = new ArrayList<Point>();
+//		for (int i = 0; i < N; i++)
+//			for (int j = 0; j < N; j++)
+//				list.add(new Point(i, j));
+//		Collections.shuffle(list, ourRandom);
+//		return list;
+//	}
 	
 	// calculate sample mean for generated percolation thresholds
 	public double mean() {
