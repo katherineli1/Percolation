@@ -52,24 +52,24 @@ public class PercolationStats {
 			//PercolationUF perc = new PercolationUF(N, new QuickFind(N)); // initialize new Percolation object
 			int myOpenedSites = 0; // initialize a variable to keep track of opened sites
 						
-//			while (!perc.percolates()) {
-//				int x = ourRandom.nextInt(N);
-//				int y = ourRandom.nextInt(N);
-//				if (!perc.isOpen(x, y)) {
-//					perc.open(x, y);
-//					myOpenedSites++;
-//				}
-//			}
-			
-			List<Point> sites = getShuffledCells();	// get random list of sites
-			for (Point cell: sites) {
-				// repeatedly declare sites open until the system percolates
-//				if (!perc.isOpen(cell.x, cell.y))
-					perc.open(cell.x, cell.y);
+			while (!perc.percolates()) {
+				int x = ourRandom.nextInt(N);
+				int y = ourRandom.nextInt(N);
+				if (!perc.isOpen(x, y)) {
+					perc.open(x, y);
 					myOpenedSites++;
-					if (perc.percolates())
-						break;
+				}
 			}
+			
+//			List<Point> sites = getShuffledCells();	// get random list of sites
+//			for (Point cell: sites) {
+//				// repeatedly declare sites open until the system percolates
+//				if (!perc.isOpen(cell.x, cell.y))
+//					perc.open(cell.x, cell.y);
+//					myOpenedSites++;
+//					if (perc.percolates())
+//						break;
+//			}
 						
 			fractions[i] = (double) myOpenedSites/(N*N); // store percolation threshold in 'fractions' double array
 		}
@@ -82,15 +82,15 @@ public class PercolationStats {
 		confidenceHigh();
 	}
 	
-	// generate a random list of shuffled cell positions within the grid
-	private List<Point> getShuffledCells() {
-		ArrayList<Point> list = new ArrayList<Point>();
-		for (int i = 0; i < N; i++)
-			for (int j = 0; j < N; j++)
-				list.add(new Point(i, j));
-		Collections.shuffle(list, ourRandom);
-		return list;
-	}
+//	// generate a random list of shuffled cell positions within the grid
+//	private List<Point> getShuffledCells() {
+//		ArrayList<Point> list = new ArrayList<Point>();
+//		for (int i = 0; i < N; i++)
+//			for (int j = 0; j < N; j++)
+//				list.add(new Point(i, j));
+//		Collections.shuffle(list, ourRandom);
+//		return list;
+//	}
 	
 	// calculate sample mean for generated percolation thresholds
 	public double mean() {
@@ -130,7 +130,7 @@ public class PercolationStats {
 //			T = Integer.parseInt(input.split(", ")[1]);
 //		}
 		
-		PercolationStats test = new PercolationStats(80, 10);
+		PercolationStats test = new PercolationStats(20, 10);
 		
 		System.out.println(test.mean());
 		System.out.println(test.stddev());
