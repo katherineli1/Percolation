@@ -15,8 +15,8 @@ import javax.swing.JOptionPane;
 public class PercolationStats {
 	public static int RANDOM_SEED = 1234;
 	public static Random ourRandom = new Random(RANDOM_SEED);
-	public static int N, T;
 	
+	private static int N, T;
 	private long[] times;
 	private double[] fractions;
 	
