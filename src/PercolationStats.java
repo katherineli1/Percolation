@@ -37,7 +37,7 @@ public class PercolationStats {
 	 * @param fractions
 	 * 				double array of percolation thresholds
 	 */
-	public PercolationStats(int N_loc, int T_loc) {
+	public PercolationStats(int N, int T) {
 		if (N <= 0 || T <= 0)
 			throw new IllegalArgumentException();
 
