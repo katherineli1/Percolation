@@ -32,7 +32,7 @@ public class PercolationVisualizer {
 	}
 
 	/**
-	 * Draws a square of color c at (row,col) on a N*N grid
+	 * Draws a square of color c at (row, col) on a N*N grid
 	 */
 	public void draw(int row, int col, Color c) {
 		StdDraw.setPenColor(c);
@@ -78,9 +78,8 @@ public class PercolationVisualizer {
 			if (myPerc.percolates())
 				break;
 		}
-		drawGrid();
-		// wait DEFAULT_DELAY milliseconds and then display
-		
+		// draw percolation system
+		drawGrid();		
 	}
 	
 	public static void main(String[] args) {
@@ -102,9 +101,6 @@ public class PercolationVisualizer {
 		pv.run();
 		
 		// IPercolate perc = new PercolationUF(N);
-		// TODO repeatedly declare sites open, draw, & pause until the system
-		// percolates
-		// draw percolation system
 
 		// wait DEFAULT_DELAY milliseconds and then display
 		StdDraw.show(DEFAULT_DELAY);

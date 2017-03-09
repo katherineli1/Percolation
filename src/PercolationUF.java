@@ -18,15 +18,22 @@ public class PercolationUF implements IPercolate {
 	private final int OUT_BOUNDS = -1;
 	
 	public int[][] myGrid;
+	private int myOpenSites;
+	IUnionFind myUnion;
+	
+	private int top = 0;
+	private int bottom;
+	
 
 	/**
 	 * Constructs a Percolation object for a nxn grid that that creates
 	 * a IUnionFind object to determine whether cells are full
 	 */
 	public PercolationUF(int n) {
-		// TODO complete PercolationUF constructor
+		myOpenSites = 0;
 		myGrid = new int[n][n];
-		
+		bottom = n * n + 1;
+		myUnion = new QuickUWPC(n * n + 2);
 	}
 
 	/**
@@ -36,38 +43,72 @@ public class PercolationUF implements IPercolate {
 	 */
 	public int getIndex(int row, int col) {
 		// TODO complete getIndex
-		return OUT_BOUNDS;
+		if (row < 0 || row >= myGrid.length || col < 0 || col >= myGrid[0].length) {
+			// throw new IndexOutOfBoundsException("Index " + row + "," + col + " out of bounds.");
+			return OUT_BOUNDS;
+		}
+		
+		return row * myGrid[row].length + col;
 	}
 
 	public void open(int i, int j) {
 		// TODO complete open
+		
+		if (i < 0 || i >= myGrid.length || j < 0 || j >= myGrid[0].length)
+			// out of bounds
+			throw new IndexOutOfBoundsException("Index " + i + "," + j + " is bad!");
+		
+		if (myGrid[i][j] != BLOCKED)
+			return;
+		
+		myOpenSites++;
+		myGrid[i][j] = OPEN;
+		
+		connect(i, j);
+			
 	}
 
 	public boolean isOpen(int i, int j) {
-		// TODO complete isOpen
-		return false;
+		if (i < 0 || i >= myGrid.length || j < 0 || j >= myGrid[0].length)
+			// out of bounds
+			throw new IndexOutOfBoundsException("Index " + i + "," + j + " is bad!");
+		
+		// check if the cell (row, column) of myGrid is open
+		return myGrid[i][j] == OPEN || myGrid[i][j] == FULL;
 	}
 
 	public boolean isFull(int i, int j) {
-		// TODO complete isFull
-		return false;
+		if (i < 0 || i >= myGrid.length || j < 0 || j >= myGrid[0].length)
+			// out of bounds
+			throw new IndexOutOfBoundsException("Index " + i + "," + j + " is bad!");
+		
+		// check if the cell (row, column) of myGrid is full
+		return myGrid[i][j] == FULL || myGrid[i][j] == OPEN;
 	}
 
 	public int numberOfOpenSites() {
-		// TODO return the number of calls to open new sites
-		return 0;
+		// returns the number of calls to open new sites
+		return myOpenSites;
 	}
 
 	public boolean percolates() {
 		// TODO complete percolates
-		return false;
+		return myUnion.connected(top, bottom);
 	}
 
 	/**
 	 * Connect new site (row, col) to all adjacent open sites
 	 */
 	private void connect(int row, int col) {
-		// TODO complete connect
+		// union cell with top or bottom
+		if (row == 0) myUnion.union(getIndex(row, col), top);
+		if (row == myGrid.length - 1) myUnion.union(getIndex(row, col), bottom);
+		
+		// union cell with four adjacent cells if cells are open and not out of bounds
+		if ((row - 1 >= 0 && row - 1 < myGrid.length) && isOpen(row - 1, col)) myUnion.union(getIndex(row, col), getIndex(row - 1, col));
+		if ((row + 1 >= 0 && row + 1 < myGrid.length) && isOpen(row + 1, col)) myUnion.union(getIndex(row, col), getIndex(row + 1, col));
+		if ((col - 1 >= 0 && col - 1 < myGrid.length) && isOpen(row, col - 1)) myUnion.union(getIndex(row, col), getIndex(row, col - 1));
+		if ((col + 1 >= 0 && col + 1 < myGrid.length) && isOpen(row, col + 1)) myUnion.union(getIndex(row, col), getIndex(row, col + 1));
 	}
 
 }

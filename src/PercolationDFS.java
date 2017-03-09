@@ -27,25 +27,24 @@ public class PercolationDFS implements IPercolate {
 	 * @param n 
 	 * 				is the size of the simulated (square) grid
 	 */
-	
 	public PercolationDFS(int n) {
-		myOpenSites  = 0;
+		myOpenSites = 0;
 		myGrid = new int[n][n];
 		for (int[] row : myGrid)
 			Arrays.fill(row, BLOCKED);
-//		alternative way to fill grid
-//		for (int i = 0; i < myGrid.length; i++)
-//			for (int j = 0; j < myGrid[i].length; j++)
-//				myGrid[i][j] = BLOCKED;
 	}
 
 	public void open(int i, int j) {
+		if (i < 0 || i >= myGrid.length || j < 0 || j >= myGrid[0].length)
+			// out of bounds
+			throw new IndexOutOfBoundsException("Index " + i + "," + j + " is bad!");
+		
 		if (myGrid[i][j] != BLOCKED)
 			return;
 		
 		myOpenSites++;
 		myGrid[i][j] = OPEN;
-
+		
 		// flush grid; mark all full cells as open
 		for (int k = 0; k < myGrid.length; k++)
 			for (int l = 0; l < myGrid[k].length; l++)
@@ -105,7 +104,6 @@ public class PercolationDFS implements IPercolate {
 	 * @param col
 	 *            is the col coordinate of the cell being checked/marked
 	 */
-	
 	private void dfs(int row, int col) {
 		// checks for out of bounds
 		if (row < 0 || row >= myGrid.length || col < 0 || col >= myGrid.length)

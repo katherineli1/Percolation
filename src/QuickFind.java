@@ -51,7 +51,7 @@ public class QuickFind implements IUnionFind {
 		return myID[x];
 	}
 
-	// are elements p and q in the same component?
+	// returns true if elements p and q are in the same component
 	public boolean connected(int p, int q) {
 		return myID[p] == myID[q];
 	}
