@@ -25,6 +25,13 @@ public class PercolationVisualizer {
 	private int mySize;
 	private IPercolate myPerc;
 	
+	/**
+	 * Initializes mySize, myPerc, and the initial grid display
+	 * @param n
+	 * 				number of rows and columns
+	 * @param perc
+	 * 				Percolation object being used to visualize
+	 */
 	public PercolationVisualizer(int n, IPercolate perc) {
 		mySize = n;
 		myPerc = perc;
@@ -39,6 +46,7 @@ public class PercolationVisualizer {
 		StdDraw.filledSquare(col + .5, mySize - row - .5, .45);
 	}
 	
+	// generates initial grid display
 	private static void initDisplay(int N) {
 		// draw a black box
 		StdDraw.setPenColor(Color.BLACK);
@@ -67,6 +75,7 @@ public class PercolationVisualizer {
 		
 	}
 	
+	// run the random generation to check for percolation probability 
 	public void run() {
 		// get random list of sites
 		List<Point> sites = getShuffledCells();

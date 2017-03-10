@@ -38,19 +38,6 @@ public class PercolationUF implements IPercolate {
 		bottom = n * n + 1;
 		myUnion = new QuickUWPC(n * n + 2);
 	}
-	
-	/** 
-	 * Alternative constructor for PercolationUF that also takes different
-	 * types of IUnionFind objects
-	 */
-	public PercolationUF(int n, IUnionFind unionObj) {
-		if (n <= 0) throw new IllegalArgumentException();
-		myOpenSites = 0;
-		myGrid = new int[n][n];
-		top = n * n;
-		bottom = n * n + 1;
-		myUnion = unionObj;
-	}
 
 	/**
 	 * Return an index that uniquely identifies (row,col), typically an index
@@ -113,7 +100,7 @@ public class PercolationUF implements IPercolate {
 	 * Connect new site (row, col) to all adjacent open sites
 	 */
 	private void connect(int row, int col) {
-		// union cell with top or bottom
+		// union cell with virtual top or bottom
 		if (row == 0) myUnion.union(getIndex(row, col), top);
 		if (row == myGrid.length - 1) myUnion.union(getIndex(row, col), bottom);
 		
@@ -125,13 +112,3 @@ public class PercolationUF implements IPercolate {
 	}
 }
 
-//private List<Point> fileInput(String filename) {
-//	Scanner scan = new Scanner(filename);
-//	int n = Integer.parseInt(scan.nextLine());
-//	ArrayList<Point> list = new ArrayList<Point>();
-//	while (scan.hasNext()) {
-//		list.add(new Point(Integer.parseInt(scan.next()), Integer.parseInt(scan.next())));
-//	}
-//	scan.close();
-//	return list;
-//}

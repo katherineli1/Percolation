@@ -1,8 +1,8 @@
 Name: Katherine Li
 NetID: kl261
-Hours Spent: 8.0
+Hours Spent: 12.0
 Consulted With: Peyton Schafer, TA Cathy Chi, Dr. Forbes
-Resources Used: None
+Resources Used: http://trinity.capture.duke.edu/Panopto/Pages/Viewer.aspx?id=f1eb7a64-a2ce-4894-b288-dacb922d9234
 Impressions: The actual coding portion of the assignment wasn't too hard; it was mainly really difficult because the instructions
 were vague and unclear and the concept of union find structures was hard to grasp.
 ----------------------------------------------------------------------
@@ -11,32 +11,47 @@ PercolationDFS:
 T = 10, N = 20 --> runtime = 43 ms
 		N = 40 --> runtime = 95 ms
 		N = 80 --> runtime = 304 ms
+For PercolationDFS, doubling N exponentially increases the runtime because from N = 20 to N = 40, there is ~2 fold
+increase in runtime but from N = 40 to N = 80 there is a ~3 fold increase and this rate of increase continues to 
+change nonlinearly as N gets larger.
 
 PercolationUF w/ QuickFind:
 T = 10, N = 20 --> runtime = 14 ms
 		N = 40 --> runtime = 27 ms
 		N = 80 --> runtime = 196 ms
+For PercolationUF w/ QuickFind, doubling N causes an exponential increase in runtime because there is ~2 fold increase from 
+N = 20 to N = 40 but then almost a 7 fold increase from N = 40 to N = 80, indicating that the rate of change is not linear.
 
 PercolationUF w/ QuickUWPC:
 T = 10, N = 20 --> runtime = 8 ms
 		N = 40 --> runtime = 14 ms
 		N = 80 --> runtime = 31 ms
+For PercolationUF w/ QuickUWPC, doubling N fairly consistently leads to a doubling in runtime, i.e. a roughly linear relationship
+between N and runtime.
+
 
 Problem 2: How does doubling T affect the running time?
 PercolationDFS:
 N = 20, T = 10 --> runtime = 41 ms
 		T = 20 --> runtime = 64 ms
 		T = 40 --> runtime = 70 ms
+For PercolationDFS, doubling T yields a logarithmic change in runtime because when T is small, doubling T yields a larger 
+increase in runtime but when T gets larger, further doubling T yields a smaller and smaller change in runtime.
 
 PercolationUF w/ QuickFind:
 N = 20, T = 10 --> runtime = 12 ms
 		T = 20 --> runtime = 18 ms
 		T = 40 --> runtime = 22 ms
+For PercolationUF w/ QuickFind, doubling T also yields a logarithmic change in runtime because when T is small, doubling T 
+yields a larger increase in runtime but when T gets larger, further doubling T yields a smaller and smaller change in runtime.
 
 PercolationUF w/ QuickUWPC:
 N = 20, T = 10 --> runtime = 8 ms
 		T = 20 --> runtime = 10 ms
 		T = 40 --> runtime = 13 ms
+For PercolationUF w/ QuickUWPC, doubling T also yields a logarithmic change in runtime because when T is small, doubling T 
+yields a larger increase in runtime but when T gets larger, further doubling T yields a smaller and smaller change in runtime.
+
 
 Problem 3: Measure running time (using calls to System.currentTimeMillis)
 of the three versions of your program (DFS, Quick Find, and weighted quick
@@ -46,16 +61,23 @@ When N = 20 and T = 10:
 3B Quick Find: 13 ms
 3C Weighted quick union with path compression: 8 ms
 
+
 Problem 4: Give a formula (using Big-Oh notation) of the running time on your computer (in seconds) as a function of both N and T.
+Running time DFS = O(T*(N**4))
+Running time UF QuickFind = O(T*(N**4))
+Running time UF QuickUWRP = O(T*N*N)
+
 
 Problem 5: Estimate the largest experiment you could  perform in one
 [minute, day, year] assuming your computer has enough memory.
-5A 1 minute:
-5B 1 day:
-5C 1 year:
+5A 1 minute: 60/ (T*N*N)
+5B 1 day: 86400/ (T*N*N)
+5C 1 year: 31536000/ (T*N*N)
+
 
 Problem 6: Give a formula (using Big-Oh notation) that describes the amount
 of memory (in bytes) that your IPercolate implementation consumes as a function of N.
-6A DFS: 
-6B Quick Find:
-6C Weighted quick union with path compression:
+6A DFS: O(N*N)
+6B Quick Find: O(N*N) 
+6C Weighted quick union with path compression: O(N*N)
+

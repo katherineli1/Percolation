@@ -45,11 +45,9 @@ public class PercolationStats {
 		T = T_loc;
 		fractions = new double[T];
 		
-		long start = System.currentTimeMillis(); // start time for percolation trial
-		
 		// perform T experiments for an N-by-N grid
 		for (int i = 0; i < T; i++) {
-			PercolationUF perc = new PercolationUF(N);
+			PercolationDFS perc = new PercolationDFS(N);
 			//PercolationUF perc = new PercolationUF(N, new QuickFind(N)); // initialize new Percolation object
 			int myOpenedSites = 0; // initialize a variable to keep track of opened sites
 						
@@ -61,32 +59,10 @@ public class PercolationStats {
 					myOpenedSites++;
 				}
 			}
-			
-//			List<Point> sites = getShuffledCells();	// get random list of sites
-//			for (Point cell: sites) {
-//				// repeatedly declare sites open until the system percolates
-//				if (!perc.isOpen(cell.x, cell.y))
-//					perc.open(cell.x, cell.y);
-//					myOpenedSites++;
-//					if (perc.percolates())
-//						break;
-//			}
 						
 			fractions[i] = (double) myOpenedSites/(N*N); // store percolation threshold in 'fractions' double array
 		}
-		long end = System.currentTimeMillis(); // end time for percolation trial (after percolating);
-		System.out.println("Run Time: " + (end - start));
 	}
-	
-//	// generate a random list of shuffled cell positions within the grid
-//	private List<Point> getShuffledCells() {
-//		ArrayList<Point> list = new ArrayList<Point>();
-//		for (int i = 0; i < N; i++)
-//			for (int j = 0; j < N; j++)
-//				list.add(new Point(i, j));
-//		Collections.shuffle(list, ourRandom);
-//		return list;
-//	}
 	
 	// calculate sample mean for generated percolation thresholds
 	public double mean() {
@@ -117,21 +93,15 @@ public class PercolationStats {
 	
 	// print out statistics values for testing and analysis
 	public static void main(String[] args) {
-//		if (args.length == 2) {
-//			N = Integer.parseInt(args[0]);
-//			T = Integer.parseInt(args[1]);
-//		} else {
-//			String input = JOptionPane.showInputDialog("Enter N and T", "20, 100");
-//			N = Integer.parseInt(input.split(", ")[0]);
-//			T = Integer.parseInt(input.split(", ")[1]);
-//		}
-		
+		long start = System.currentTimeMillis(); // start time for percolation trial
 		PercolationStats test = new PercolationStats(20, 10);
+		long end = System.currentTimeMillis(); // end time for percolation trial (after percolating);
 		
-		System.out.println(test.mean());
-		System.out.println(test.stddev());
-		System.out.println(test.confidenceLow());
-		System.out.println(test.confidenceHigh());
+		System.out.println("Run Time: " + (end - start));
+		System.out.println("Mean: " + test.mean());
+		System.out.println("Standard Dev.: " + test.stddev());
+		System.out.println("95% CI Lower Bound: " + test.confidenceLow());
+		System.out.println("95% CI Upper Bound: " + test.confidenceHigh());
 	}
 	
 }

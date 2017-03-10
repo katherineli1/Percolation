@@ -34,7 +34,8 @@ public class PercolationDFS implements IPercolate {
 		for (int[] row : myGrid)
 			Arrays.fill(row, BLOCKED);
 	}
-
+	
+	// open a site if it is not already open and run dfs
 	public void open(int i, int j) {
 		if (i < 0 || i >= myGrid.length || j < 0 || j >= myGrid[0].length)
 			// out of bounds
@@ -59,6 +60,7 @@ public class PercolationDFS implements IPercolate {
 		}
 	}
 	
+	// returns true iff a cell is open
 	public boolean isOpen(int i, int j) {
 		if (i < 0 || i >= myGrid.length || j < 0 || j >= myGrid[0].length)
 			// out of bounds
@@ -68,6 +70,7 @@ public class PercolationDFS implements IPercolate {
 		return myGrid[i][j] == OPEN;
 	}
 
+	// returns true iff a cell is full
 	public boolean isFull(int i, int j) {
 		if (i < 0 || i >= myGrid.length || j < 0 || j >= myGrid[0].length)
 			// out of bounds
@@ -76,14 +79,15 @@ public class PercolationDFS implements IPercolate {
 		// check if the cell (row, column) of myGrid is full
 		return myGrid[i][j] == FULL;
 	}
-
+	
+	// returns the number of calls to open new sites
 	public int numberOfOpenSites() {
-		// returns the number of calls to open new sites
 		return myOpenSites;
 	}
 
+	// run DFS for every open cell in top row to find all full sites
+	// checks bottom row for filled sites; if filled, return true; else, return false
 	public boolean percolates() {
-		// run DFS to find all full sites
 		for (int col = 0; col < myGrid[0].length; col++) {
 			if (isOpen(0, col))
 				dfs(0, col);
